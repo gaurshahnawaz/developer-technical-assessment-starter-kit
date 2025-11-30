@@ -86,6 +86,7 @@
   font-size: 0.75rem;
   color: #475569;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .hero-title {
@@ -93,12 +94,16 @@
   line-height: 1.2;
   font-weight: 800;
   color: #0b1120;
+  text-align: center;
 }
 
 .hero-subtitle {
-  font-size: 1.05rem;
+  font-size: 0.85rem;
   color: #475569;
-  max-width: 540px;
+  max-width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 400;
 }
 
 .hero-search {

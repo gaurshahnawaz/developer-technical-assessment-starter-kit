@@ -189,10 +189,9 @@ const LandingPage: React.FC = () => {
         </aside>
 
         <section className="hero-panel">
-          <p className="hero-eyebrow">Unlock your dream home</p>
-          <h1 className="hero-title">Search Verified Properties, Projects, and Land Across Oman</h1>
+          <h1 className="hero-title"><b>Unlock Your Dream Home</b></h1>
           <p className="hero-subtitle">
-            Use the advanced search and smart filters to surface offerings that match your budget, lifestyle, and location preferences.
+            Search Verified Properties, Projects, and Land Across Oman
           </p>
 
           <form className="hero-search" onSubmit={handleSearchSubmit}>
