@@ -1,0 +1,152 @@
+.chart-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.chart-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0b1120;
+}
+
+.chart-description {
+  margin: 0 0 1.5rem 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Recharts customization */
+.recharts-wrapper {
+  margin: 0 -2rem;
+  padding: 0 2rem;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: #64748b;
+  font-size: 12px;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.recharts-default-tooltip {
+  outline: none;
+}
+
+/* Schools list styling */
+.schools-list {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.schools-list h4 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0b1120;
+}
+
+.schools-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.school-item {
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.school-item:hover {
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%);
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+}
+
+.school-name {
+  font-weight: 600;
+  color: #0b1120;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.school-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stars {
+  font-size: 1rem;
+}
+
+.rating-value {
+  font-weight: 700;
+  color: #2563eb;
+  font-size: 0.9rem;
+}
+
+.school-distance {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .chart-title {
+    font-size: 1.1rem;
+  }
+
+  .recharts-wrapper {
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .schools-table {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+  }
+
+  .chart-description {
+    font-size: 0.8rem;
+  }
+
+  .recharts-cartesian-axis-tick text {
+    font-size: 10px;
+  }
+
+  .schools-list h4 {
+    font-size: 0.95rem;
+  }
+
+  .school-name {
+    font-size: 0.9rem;
+  }
+}

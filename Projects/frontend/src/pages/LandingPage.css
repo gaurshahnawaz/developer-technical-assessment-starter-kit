@@ -466,6 +466,75 @@
   gap: 1.5rem;
 }
 
+.landing-footer {
+  background: #0f172a;
+  color: #f1f5f9;
+  padding: 3rem 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid #1e293b;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.footer-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin: 0;
+  text-align: center;
+}
+
+.footer-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-tab {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-tab:hover {
+  color: #38bdf8;
+}
+
+.footer-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #38bdf8;
+  transition: width 0.3s ease;
+}
+
+.footer-tab:hover::after {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .landing-hero {
     grid-template-columns: 1fr;
@@ -512,6 +581,25 @@
   .cards-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .footer-tabs {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-tab {
+    font-size: 0.9rem;
+  }
+
+  .landing-footer {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .footer-container {
+    gap: 1.5rem;
   }
 }
 

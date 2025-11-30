@@ -372,6 +372,24 @@ const LandingPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <footer className="landing-footer">
+        <div className="footer-container">
+          <div className="footer-header">
+            <p className="footer-eyebrow">A REAL ESTATE MARKETPLACE</p>
+          </div>
+          <div className="footer-tabs">
+            <a href="#about" className="footer-tab">About</a>
+            <a href="#role" className="footer-tab">Role</a>
+            <a href="#curators" className="footer-tab">Curators</a>
+            <a href="#history" className="footer-tab">History</a>
+            <a href="#resources" className="footer-tab">Resources</a>
+            <a href="#legal" className="footer-tab">Legal</a>
+            <a href="#program" className="footer-tab">Program</a>
+            <a href="#social" className="footer-tab">Social</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

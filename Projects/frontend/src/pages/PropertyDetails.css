@@ -594,6 +594,15 @@
 /* RESPONSIVE BREAKPOINTS */
 
 /* Tablet - Large (1024px and below) */
+/* Visualization Section */
+.visualization-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 1024px) {
   .details-grid {
     grid-template-columns: 1fr;

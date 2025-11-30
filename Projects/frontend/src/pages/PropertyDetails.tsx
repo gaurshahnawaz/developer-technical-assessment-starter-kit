@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import './PropertyDetails.css';
+import '../components/VisualizationCharts.css';
 import { Property } from '../types';
 import api from '../services/api';
 import { getPropertyImageUrl, getDefaultImage } from '../utils/imageUtils';
+import PriceHistoryChart from '../components/PriceHistoryChart';
+import SchoolRatingsChart from '../components/SchoolRatingsChart';
 
 // EXACT WIREFRAME IMPLEMENTATION - PROPERTY DETAILS PAGE
 // 2-COLUMN LAYOUT: LEFT (Image Gallery) + RIGHT (Details)
@@ -281,6 +284,12 @@ const PropertyDetails: React.FC = () => {
               </ul>
             </div>
           )}
+
+          {/* Data Visualization Charts */}
+          <div className="visualization-section">
+            <PriceHistoryChart propertyId={property.id} />
+            <SchoolRatingsChart propertyId={property.id} />
+          </div>
 
           {/* Contact Form */}
           <div className="contact-section">
