@@ -265,7 +265,7 @@ const LandingPage: React.FC = () => {
           <p className="sidebar-eyebrow">A REAL ESTATE MARKETPLACE</p>
           <h2 className="sidebar-title">
             Explore Oman Housing Bank
-            <span>curated collections</span>
+            <span>Curated Collections</span>
           </h2>
           <p className="sidebar-copy">
             High-trust listings, verified agents, and personalized recommendations tailored to your lifestyle.
