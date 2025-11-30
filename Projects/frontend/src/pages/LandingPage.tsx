@@ -108,6 +108,51 @@ const footerContent: Record<string, FooterTabContent> = {
   }
 };
 
+interface HeaderTabContent {
+  title: string;
+  content: string;
+  details?: string[];
+}
+
+const headerTabsContent: Record<string, HeaderTabContent> = {
+  processes: {
+    title: 'Our Processes',
+    content: 'Streamlined and transparent processes designed to make your real estate journey seamless and worry-free.',
+    details: [
+      'Property Search & Discovery: Advanced filtering and AI-powered recommendations',
+      'Application Process: Simple 3-step online application with instant approval',
+      'Verification & Authentication: Rigorous verification of all listings and agents',
+      'Financing Solutions: Flexible payment options and loan processing',
+      'Closing & Handover: Secure transaction handling and property transfer',
+      'After-Sales Support: Dedicated support team for all post-purchase needs'
+    ]
+  },
+  help: {
+    title: 'Help & Support',
+    content: 'Get answers to your questions and find guidance on all aspects of using our platform.',
+    details: [
+      'FAQ: Frequently asked questions about properties, financing, and the marketplace',
+      'Search Tips: Master advanced search techniques to find your perfect property',
+      'Financing Guide: Understand different loan options and requirements',
+      'Safety & Security: Learn how we protect your personal and financial information',
+      'Contact Support: Reach our 24/7 customer support team via phone, email, or chat',
+      'Documentation: Access detailed guides and documentation for all platform features'
+    ]
+  },
+  properties: {
+    title: 'Properties',
+    content: 'Browse our comprehensive collection of verified properties across Oman.',
+    details: [
+      'Featured Listings: Hand-picked properties matching market demands',
+      'Advanced Filters: Filter by location, price, bedrooms, amenities, and more',
+      'Virtual Tours: 360° immersive property tours with detailed photography',
+      'Price Trends: Market analysis and price history for informed decisions',
+      'Agent Directory: Connect with verified and trusted real estate professionals',
+      'Save & Compare: Create shortlists and compare multiple properties side by side'
+    ]
+  }
+};
+
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
@@ -119,6 +164,7 @@ const LandingPage: React.FC = () => {
   const [listingType, setListingType] = useState<'properties' | 'projects' | 'lands'>('properties');
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
   const [activeFooterTab, setActiveFooterTab] = useState<string | null>(null);
+  const [activeHeaderTab, setActiveHeaderTab] = useState<string | null>(null);
 
   // Load saved searches from localStorage on mount
   useEffect(() => {
@@ -260,6 +306,44 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="landing-page">
+      <nav className="landing-nav">
+        <div className="nav-container">
+          <div className="nav-tabs">
+            {['processes', 'help', 'properties'].map((tab) => (
+              <button
+                key={tab}
+                className={`nav-tab ${activeHeaderTab === tab ? 'active' : ''}`}
+                onClick={() => setActiveHeaderTab(activeHeaderTab === tab ? null : tab)}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
+          {activeHeaderTab && (
+            <div className="nav-content">
+              <div className="nav-content-header">
+                <h3>{headerTabsContent[activeHeaderTab].title}</h3>
+                <button 
+                  className="nav-content-close"
+                  onClick={() => setActiveHeaderTab(null)}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+              </div>
+              <p className="nav-content-description">{headerTabsContent[activeHeaderTab].content}</p>
+              {headerTabsContent[activeHeaderTab].details && (
+                <ul className="nav-content-list">
+                  {headerTabsContent[activeHeaderTab].details?.map((detail, idx) => (
+                    <li key={idx}>{detail}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+      </nav>
+
       <header className="landing-hero">
         <aside className="hero-sidebar">
           <p className="sidebar-eyebrow">A REAL ESTATE MARKETPLACE</p>
