@@ -17,6 +17,97 @@ interface SavedSearch {
   timestamp: number;
 }
 
+interface FooterTabContent {
+  title: string;
+  content: string;
+  details?: string[];
+}
+
+const footerContent: Record<string, FooterTabContent> = {
+  about: {
+    title: 'About Oman Housing Bank',
+    content: 'At Oman Housing Bank, we are dedicated to supporting the dreams of homeowners across the nation for over four decades. Our commitment to excellence and innovation drives us to provide exceptional housing solutions tailored to the needs of our community.',
+    details: [
+      'Established in 1977',
+      'Serving the nation for over 45 years',
+      'Committed to sustainable development',
+      'Trusted housing finance partner'
+    ]
+  },
+  role: {
+    title: 'Our Role',
+    content: 'Oman Housing Bank plays a crucial role in providing subsidized housing loans and financial services to ensure every citizen has access to quality housing. We deliver comprehensive financial solutions and expert consultation services.',
+    details: [
+      'Provide subsidized housing loans',
+      'Offer comprehensive financial services',
+      'Deliver expert consultation services',
+      'Support sustainable development'
+    ]
+  },
+  curators: {
+    title: 'Leadership & Management',
+    content: 'Our experienced leadership team and dedicated professionals work together to ensure excellence in all aspects of our operations and customer service.',
+    details: [
+      'Executive Leadership Team',
+      'Board of Directors',
+      'Senior Management',
+      'Professional Staff'
+    ]
+  },
+  history: {
+    title: 'Our History',
+    content: 'Oman Housing Bank has been a cornerstone of the nation\'s housing development since 1977. Over four decades of service, we have built a legacy of trust, innovation, and commitment to providing quality housing solutions.',
+    details: [
+      'Founded in 1977',
+      'Four decades of service',
+      'Consistent growth and expansion',
+      'Building a brighter future for Oman'
+    ]
+  },
+  resources: {
+    title: 'Resources & Services',
+    content: 'We offer a comprehensive range of services including lending services, deposit services, partner services, treasury services, and customer experience solutions.',
+    details: [
+      'Lending Services',
+      'Deposit Services',
+      'Partner Services',
+      'Treasury Services',
+      'Customer Experience',
+      'Iskan Program'
+    ]
+  },
+  legal: {
+    title: 'Legal & Compliance',
+    content: 'Oman Housing Bank operates under strict legal and regulatory frameworks to ensure transparency, accountability, and protection of customer rights.',
+    details: [
+      'Charter of Customer Rights',
+      'Business Continuity Management',
+      'Regulatory Compliance',
+      'Whistleblowing Policy'
+    ]
+  },
+  program: {
+    title: 'Iskan Program',
+    content: 'The Iskan Program is a comprehensive housing initiative designed to make homeownership more accessible to citizens through favorable financing options and flexible terms.',
+    details: [
+      'Subsidized housing loans',
+      'Flexible payment terms',
+      'Low interest rates',
+      'Easy approval process'
+    ]
+  },
+  social: {
+    title: 'Connect With Us',
+    content: 'Follow Oman Housing Bank on our social media channels to stay updated with the latest news, announcements, and industry insights.',
+    details: [
+      'Email: ohb@ohb.co.om',
+      'Phone: +968 24775800',
+      'P.O. Box 2555, Ruwi 112, Oman',
+      'Facebook | LinkedIn | Twitter | YouTube | Instagram'
+    ]
+  }
+};
+
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [featuredProperties, setFeaturedProperties] = useState<Property[]>([]);
@@ -27,6 +118,7 @@ const LandingPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [listingType, setListingType] = useState<'properties' | 'projects' | 'lands'>('properties');
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
+  const [activeFooterTab, setActiveFooterTab] = useState<string | null>(null);
 
   // Load saved searches from localStorage on mount
   useEffect(() => {
@@ -379,14 +471,84 @@ const LandingPage: React.FC = () => {
             <p className="footer-eyebrow">A REAL ESTATE MARKETPLACE</p>
           </div>
           <div className="footer-tabs">
-            <a href="#about" className="footer-tab">About</a>
-            <a href="#role" className="footer-tab">Role</a>
-            <a href="#curators" className="footer-tab">Curators</a>
-            <a href="#history" className="footer-tab">History</a>
-            <a href="#resources" className="footer-tab">Resources</a>
-            <a href="#legal" className="footer-tab">Legal</a>
-            <a href="#program" className="footer-tab">Program</a>
-            <a href="#social" className="footer-tab">Social</a>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'about' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'about' ? null : 'about')}
+            >
+              About
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'role' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'role' ? null : 'role')}
+            >
+              Role
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'curators' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'curators' ? null : 'curators')}
+            >
+              Curators
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'history' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'history' ? null : 'history')}
+            >
+              History
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'resources' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'resources' ? null : 'resources')}
+            >
+              Resources
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'legal' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'legal' ? null : 'legal')}
+            >
+              Legal
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'program' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'program' ? null : 'program')}
+            >
+              Program
+            </button>
+            <button 
+              className={`footer-tab ${activeFooterTab === 'social' ? 'active' : ''}`}
+              onClick={() => setActiveFooterTab(activeFooterTab === 'social' ? null : 'social')}
+            >
+              Social
+            </button>
+          </div>
+
+          {/* Footer Content Panel */}
+          {activeFooterTab && footerContent[activeFooterTab] && (
+            <div className="footer-content-panel">
+              <div className="footer-content-header">
+                <h3>{footerContent[activeFooterTab].title}</h3>
+                <button 
+                  className="close-btn"
+                  onClick={() => setActiveFooterTab(null)}
+                >
+                  ✕
+                </button>
+              </div>
+              <p className="footer-content-text">
+                {footerContent[activeFooterTab].content}
+              </p>
+              {footerContent[activeFooterTab].details && (
+                <ul className="footer-content-details">
+                  {footerContent[activeFooterTab].details.map((detail, index) => (
+                    <li key={index}>{detail}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {/* Copyright */}
+          <div className="footer-copyright">
+            <p>© 2025 Oman Housing Bank (S.A.O.C). All Rights Reserved.</p>
           </div>
         </div>
       </footer>
