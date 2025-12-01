@@ -234,4 +234,205 @@ export class AppController {
       };
     }
   }
+
+  @Get('seed-large')
+  @ApiOperation({ summary: 'Populate database with 1000+ records for testing' })
+  async seedLargeDatabase() {
+    try {
+      const propertyTypes = ['villa', 'apartment', 'townhouse', 'penthouse', 'studio'];
+      const locations = [
+        'Al Mouj, Muscat', 'Qurum, Muscat', 'Madinat Al Sultan Qaboos', 'The Wave, Muscat',
+        'Shatti Al Qurum', 'Al Khouwair', 'Azaiba', 'Ghubrah', 'Ruwi', 'Salalah',
+        'Sohar', 'Nizwa', 'Sur', 'Ibri', 'Al Hail', 'Muscat Hills', 'Bousher',
+        'Marina Bandar Al Rowdha', 'Al Khoudh', 'Seeb'
+      ];
+      const statuses = ['available', 'sold', 'reserved'];
+      const featureSets = [
+        ['parking', 'security', 'gym', 'pool', 'garden'],
+        ['parking', 'security', 'balcony'],
+        ['parking', 'security'],
+        ['furnished', 'parking', 'ac'],
+      ];
+
+      // Generate 400 properties
+      const properties = [];
+      for (let i = 1; i <= 400; i++) {
+        const type = propertyTypes[Math.floor(Math.random() * propertyTypes.length)];
+        const location = locations[Math.floor(Math.random() * locations.length)];
+        const status = statuses[Math.floor(Math.random() * statuses.length)];
+        const features = featureSets[Math.floor(Math.random() * featureSets.length)];
+        
+        let bedrooms, bathrooms, area, price;
+        if (type === 'studio') {
+          bedrooms = 0;
+          bathrooms = 1;
+          area = 40 + Math.random() * 60;
+          price = 60000 + Math.random() * 80000;
+        } else if (type === 'apartment') {
+          bedrooms = 1 + Math.floor(Math.random() * 3);
+          bathrooms = 1 + Math.floor(Math.random() * 2);
+          area = 80 + Math.random() * 170;
+          price = 90000 + Math.random() * 310000;
+        } else if (type === 'townhouse') {
+          bedrooms = 2 + Math.floor(Math.random() * 3);
+          bathrooms = 2 + Math.floor(Math.random() * 2);
+          area = 150 + Math.random() * 200;
+          price = 150000 + Math.random() * 300000;
+        } else if (type === 'penthouse') {
+          bedrooms = 3 + Math.floor(Math.random() * 3);
+          bathrooms = 3 + Math.floor(Math.random() * 3);
+          area = 250 + Math.random() * 350;
+          price = 350000 + Math.random() * 650000;
+        } else {
+          bedrooms = 3 + Math.floor(Math.random() * 4);
+          bathrooms = 3 + Math.floor(Math.random() * 4);
+          area = 300 + Math.random() * 450;
+          price = 300000 + Math.random() * 900000;
+        }
+
+        properties.push({
+          id: `prop-${i}`,
+          title: `Modern ${type.charAt(0).toUpperCase() + type.slice(1)} in ${location.split(',')[0]}`,
+          description: `Beautifully designed ${type} with modern amenities in ${location}. Perfect for families and investors.`,
+          price: Math.round(price),
+          location,
+          type,
+          bedrooms,
+          bathrooms,
+          area: Math.round(area * 100) / 100,
+          status,
+          features: features.join(', '),
+        });
+      }
+
+      // Generate 300 lands
+      const zoningTypes = ['residential', 'commercial', 'industrial', 'agricultural', 'mixed-use'];
+      const landLocations = [
+        'Muscat Hills', 'Al Hail, Muscat', 'Marina, Muscat', 'Nizwa', 'Sohar',
+        'Salalah', 'Sur', 'Ibri', 'Al Khoudh', 'Barka', 'Bousher', 'Seeb',
+        'Al Amerat', 'Quriyat', 'Rustaq', 'Bahla', 'Ibra', 'Bidbid'
+      ];
+
+      const lands = [];
+      for (let i = 1; i <= 300; i++) {
+        const zoning = zoningTypes[Math.floor(Math.random() * zoningTypes.length)];
+        const location = landLocations[Math.floor(Math.random() * landLocations.length)];
+        const status = statuses[Math.floor(Math.random() * statuses.length)];
+        
+        let area, price;
+        if (zoning === 'residential') {
+          area = 500 + Math.random() * 2000;
+          price = 100000 + Math.random() * 400000;
+        } else if (zoning === 'commercial') {
+          area = 1000 + Math.random() * 3000;
+          price = 250000 + Math.random() * 750000;
+        } else if (zoning === 'industrial') {
+          area = 2000 + Math.random() * 5000;
+          price = 400000 + Math.random() * 1200000;
+        } else if (zoning === 'agricultural') {
+          area = 5000 + Math.random() * 20000;
+          price = 50000 + Math.random() * 200000;
+        } else {
+          area = 1500 + Math.random() * 3500;
+          price = 300000 + Math.random() * 800000;
+        }
+
+        lands.push({
+          id: `land-${i}`,
+          title: `${zoning.charAt(0).toUpperCase() + zoning.slice(1)} Land Plot in ${location}`,
+          description: `Prime ${zoning} land in ${location}. Excellent location with utilities and road access.`,
+          price: Math.round(price),
+          location,
+          area: Math.round(area),
+          zoning: zoning.charAt(0).toUpperCase() + zoning.slice(1),
+          status,
+          features: 'Road Access, Utilities, Clear Ownership',
+        });
+      }
+
+      // Generate 300 projects
+      const projectNames = [
+        'Heights', 'Bay Residences', 'Residential Complex', 'Plaza Development',
+        'Waterfront', 'Gardens', 'Court', 'Towers', 'Square', 'Park'
+      ];
+      const developers = [
+        'OHB Development', 'Gulf Real Estate', 'Reef Properties', 'Al Reef Developers',
+        'Marina Builders', 'Urban Construction', 'Premium Developments', 'Luxury Homes Ltd'
+      ];
+
+      const projects = [];
+      for (let i = 1; i <= 300; i++) {
+        const name = projectNames[Math.floor(Math.random() * projectNames.length)];
+        const location = locations[Math.floor(Math.random() * locations.length)];
+        const developer = developers[Math.floor(Math.random() * developers.length)];
+        const status = 'ongoing'; // or 'completed', 'planning'
+        
+        const totalUnits = 50 + Math.floor(Math.random() * 400);
+        const availableUnits = Math.floor(totalUnits * (0.2 + Math.random() * 0.6));
+        const startingPrice = 150000 + Math.random() * 600000;
+
+        projects.push({
+          id: `proj-${i}`,
+          title: `${name} ${i}`,
+          description: `Premium development project with modern architecture and world-class amenities in ${location}.`,
+          location,
+          developer,
+          totalUnits,
+          availableUnits,
+          startingPrice: Math.round(startingPrice),
+          status,
+          amenities: featureSets[Math.floor(Math.random() * featureSets.length)].join(', '),
+          completionDate: new Date(2025 + Math.floor(Math.random() * 3), Math.floor(Math.random() * 12), 1),
+        });
+      }
+
+      let insertedCount = 0;
+      let skippedCount = 0;
+
+      // Insert properties
+      for (const prop of properties) {
+        try {
+          await this.propertiesService.create(prop as any);
+          insertedCount++;
+        } catch (e) {
+          skippedCount++;
+        }
+      }
+
+      // Insert lands
+      for (const land of lands) {
+        try {
+          await this.landsService.create(land as any);
+          insertedCount++;
+        } catch (e) {
+          skippedCount++;
+        }
+      }
+
+      // Insert projects
+      for (const proj of projects) {
+        try {
+          await this.projectsService.create(proj as any);
+          insertedCount++;
+        } catch (e) {
+          skippedCount++;
+        }
+      }
+
+      return {
+        status: 'success',
+        message: `Database seeded with large dataset`,
+        inserted: insertedCount,
+        skipped: skippedCount,
+        total: 1000,
+        timestamp: new Date().toISOString(),
+      };
+    } catch (error) {
+      return {
+        status: 'error',
+        message: error.message,
+        timestamp: new Date().toISOString(),
+      };
+    }
+  }
 }
