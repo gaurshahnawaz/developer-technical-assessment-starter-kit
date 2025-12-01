@@ -53,9 +53,43 @@ const PROJECT_IMAGES = [
   'photo-1589939705384-5185137a7f0f', // Urban development
   'photo-1599659810694-b5ac4dd37e4b', // Construction phase
   'photo-1563202563-0818a78f7fb7', // Project site
-  'photo-1541888946425-d81bb19240f5', // Building works
   'photo-1504307651254-35680f356dfd', // Architecture development
+  'photo-1486325212027-8081e485255e', // Modern building
+  'photo-1496442226666-8d4d0e62e6e9', // Building exterior
+  'photo-1486312338219-ce68d2c6f44d', // Modern design
+  'photo-1504384308090-c894fdcc538d', // Skyscraper
+  'photo-1449844908441-8829872d2607', // City development
+  'photo-1530268729831-4ca59f5c22fe', // Urban complex
+  'photo-1549887534-7983ce4a00da', // Luxury residential
+  'photo-1511884642898-4c92249e20b6', // Contemporary building
+  'photo-1486306696969-5ef1b3c3d540', // Modern development
+  'photo-1497366216548-37526070297c', // Urban architecture
+  'photo-1470071459604-3b5ec3a7fe05', // Scenic development
+  'photo-1445389841292-f5e370c63ae0', // Building exterior
+  'photo-1504384308090-c894fdcc538d', // High building
+  'photo-1430763846585-b94520c57ab6', // Modern complex
+  'photo-1593642532400-2682a8a34fe7', // Contemporary architecture
+  'photo-1486406146357-2295aab3ca14', // Urban project
+  'photo-1503387762-592deb58ef4e', // Residential tower
+  'photo-1541888946425-d81bb19240f5', // Development site
+  'photo-1512207736139-c1a1d4e06d3d', // Modern apartment
+  'photo-1486312338219-ce68d2c6f44d', // Architecture design
+  'photo-1504307651254-35680f356dfd', // Building design
+  'photo-1486406146357-2295aab3ca14', // High-rise
+  'photo-1537981609592-d05ac5d92b16', // City tower
+  'photo-1503387762-592deb58ef4e', // Tall building
+  'photo-1590856029826-c7a73a4ab8bc', // Modern residential
+  'photo-1549887534-7983ce4a00da', // Luxury homes
+  'photo-1511884642898-4c92249e20b6', // Modern complex
+  'photo-1486306696969-5ef1b3c3d540', // Premium development
+  'photo-1497366216548-37526070297c', // Urban spaces
+  'photo-1470071459604-3b5ec3a7fe05', // Scenic architecture
+  'photo-1445389841292-f5e370c63ae0', // Premium exterior
+  'photo-1504384308090-c894fdcc538d', // Iconic building
+  'photo-1430763846585-b94520c57ab6', // Luxury complex
 ];
+
+
 
 /**
  * Generate a deterministic real image URL for properties using Unsplash
@@ -64,8 +98,8 @@ export const getPropertyImageUrl = (propertyId: string, index: number = 0, width
   const hashCode = propertyId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const imageIndex = (hashCode + index) % PROPERTY_IMAGES.length;
   const photoId = PROPERTY_IMAGES[imageIndex];
-  // Using reliable Unsplash URL format with fallback
-  return `https://images.unsplash.com/${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=80&fm=jpg`;
+  // Using reliable Unsplash URL format with better parameters
+  return `https://images.unsplash.com/${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=75&fm=jpg&ixlib=rb-4.0.3`;
 };
 
 /**
@@ -75,8 +109,8 @@ export const getLandImageUrl = (landId: string, index: number = 0, width: number
   const hashCode = landId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const imageIndex = (hashCode + index) % LAND_IMAGES.length;
   const photoId = LAND_IMAGES[imageIndex];
-  // Using reliable Unsplash URL format with fallback
-  return `https://images.unsplash.com/${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=80&fm=jpg`;
+  // Using reliable Unsplash URL format with better parameters
+  return `https://images.unsplash.com/${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=75&fm=jpg&ixlib=rb-4.0.3`;
 };
 
 /**
@@ -86,8 +120,8 @@ export const getProjectImageUrl = (projectId: string, index: number = 0, width: 
   const hashCode = projectId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const imageIndex = (hashCode + index) % PROJECT_IMAGES.length;
   const photoId = PROJECT_IMAGES[imageIndex];
-  // Using reliable Unsplash URL format with fallback
-  return `https://images.unsplash.com/${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=80&fm=jpg`;
+  // Using reliable Unsplash URL format with v4 API and proper parameters
+  return `https://images.unsplash.com/${photoId}?w=${width}&h=${height}&fit=crop&auto=format&q=75&fm=jpg&ixlib=rb-4.0.3&dpr=1`;
 };
 
 /**

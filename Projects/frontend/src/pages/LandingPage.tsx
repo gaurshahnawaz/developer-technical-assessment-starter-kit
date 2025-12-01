@@ -165,6 +165,7 @@ const LandingPage: React.FC = () => {
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
   const [activeFooterTab, setActiveFooterTab] = useState<string | null>(null);
   const [activeHeaderTab, setActiveHeaderTab] = useState<string | null>(null);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   // Load saved searches from localStorage on mount
   useEffect(() => {
@@ -218,6 +219,8 @@ const LandingPage: React.FC = () => {
     fetchData();
   }, []);
 
+  const [imageRetries, setImageRetries] = useState<Map<string, number>>(new Map());
+
   const formatPrice = (price: number) => {
     if (price >= 10000000) {
       return `O$${(price / 10000000).toFixed(2)}M`;
@@ -226,6 +229,31 @@ const LandingPage: React.FC = () => {
       return `O$${(price / 100000).toFixed(0)}L`;
     }
     return `O$${price.toLocaleString()}`;
+  };
+
+  const handleImageError = (imageId: string) => {
+    // Retry with a different image index first
+    const retryCount = imageRetries.get(imageId) || 0;
+    if (retryCount < 3) {
+      setImageRetries(prev => new Map(prev).set(imageId, retryCount + 1));
+    } else {
+      setFailedImages(prev => new Set(prev).add(imageId));
+    }
+  };
+
+  const getImageUrl = (imageId: string, type: 'property' | 'land' | 'project', width: number, height: number) => {
+    if (failedImages.has(imageId)) {
+      // Use a solid color or gradient placeholder
+      return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}'%3E%3Crect fill='%23e5e7eb' width='${width}' height='${height}'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='%23999' text-anchor='middle' dy='.3em'%3E${type.toUpperCase()}%3C/text%3E%3C/svg%3E`;
+    }
+    const retryIndex = imageRetries.get(imageId) || 0;
+    if (type === 'property') {
+      return getPropertyImageUrl(imageId, retryIndex, width, height);
+    } else if (type === 'land') {
+      return getLandImageUrl(imageId, retryIndex, width, height);
+    } else {
+      return getProjectImageUrl(imageId, retryIndex, width, height);
+    }
   };
 
   const heroHighlights = useMemo(() => featuredProperties.slice(0, 3), [featuredProperties]);
@@ -454,8 +482,9 @@ const LandingPage: React.FC = () => {
             >
               <div className="card-image">
                 <img 
-                  src={getPropertyImageUrl(property.id, 0, 800, 600)}
+                  src={getImageUrl(property.id, 'property', 800, 600)}
                   alt={property.title}
+                  onError={() => handleImageError(property.id)}
                 />
               </div>
               <div className="card-body">
@@ -493,8 +522,9 @@ const LandingPage: React.FC = () => {
               >
                 <div className="card-image">
                   <img 
-                    src={getProjectImageUrl(project.id, 0, 800, 600)}
+                    src={getImageUrl(project.id, 'project', 800, 600)}
                     alt={project.title}
+                    onError={() => handleImageError(project.id)}
                   />
                 </div>
                 <div className="card-body">
@@ -529,8 +559,9 @@ const LandingPage: React.FC = () => {
               >
                 <div className="card-image">
                   <img 
-                    src={getLandImageUrl(land.id, 0, 800, 600)}
+                    src={getImageUrl(land.id, 'land', 800, 600)}
                     alt={land.title}
+                    onError={() => handleImageError(land.id)}
                   />
                 </div>
                 <div className="card-body">
